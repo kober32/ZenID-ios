@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author              = { 'JK' => 'jan@kobersky.eu' }
   s.source              = { :git => 'https://github.com/kober32/ZenID-ios.git' }
 
-  s.vendored_frameworks = ["LibZenid_iOS.xcframework", "RecogLib_iOS.xcframework"]
+  s.vendored_frameworks = ["Sources/LibZenid_iOS.xcframework", "Sources/RecogLib_iOS.xcframework"]
   s.platform            = :ios
   s.swift_version       = "5.0"
   s.ios.deployment_target  = '10.0'
