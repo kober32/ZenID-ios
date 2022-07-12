@@ -69,9 +69,18 @@ For compilation, running and deployment of the application following tools are r
     - iOS 11.0
 
 ## Installation
-### Link your project against RecogLib.xcframework and LibZenid.xcframework frameworks 
+
+### Statically link the frameworks
+Link your project against RecogLib.xcframework and LibZenid.xcframework frameworks 
 
 Go to your project and click on the `Project detail -> General` and under `Embeded binaries` add `RecogLib_iOS.xcframework` and `LibZenid_iOS.xcframework`. Both framework have to be in the `Embedded Binaries` and `Linked Frameworks and Libraries` section.
+
+
+### Installation with SPM
+
+1. Open your Xcode project.
+2. Add remote package dependency https://github.com/ZenIDTeam/ZenID-ios.git
+3. In your app target, General tab add **LibZenid_iOS** and **Recoglib_iOS** frameworks 
 
 ## Authorization
 The SDK has to be authorized, otherwise it is not going to work. 
@@ -417,7 +426,8 @@ Constructor method
 ```Swift
 let settings = FaceLivenessVerifierSettings(
     isLegacyModeEnabled: true,
-    maxAuxiliaryImageSize: 300
+    maxAuxiliaryImageSize: 300,
+    visualizerVersion: 1
 )
 let verifier = FaceLivenessVerifier(language: .Czech, settings: settings)
 ```
@@ -428,7 +438,8 @@ let verifier = FaceLivenessVerifier(...)
 ...
 let settings = FaceLivenessVerifierSettings(
     isLegacyModeEnabled: false,
-    maxAuxiliaryImageSize: 300
+    maxAuxiliaryImageSize: 300,
+    visualizerVersion: 1
 )
 verifier.update(settings: settings)
 let info = verifier.getAuxiliaryInfo()
@@ -461,9 +472,9 @@ The SDK now generates a signature for the snapshots it takes. The backend uses t
 
 The SDK provides the signature as an attribute inside of the result objects of verifiers, such as `DocumentResult`, `FaceLivenessResult`, and `SelfieResult`. Hologram does not support the signature. 
 
-This is what `Signature` structure looks like:
+This is what `ImageSignature` structure looks like:
 ```swift
-struct Signature {
+struct ImageSignature {
     let image: Data
     let signature: String
 }
