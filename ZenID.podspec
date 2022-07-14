@@ -17,16 +17,16 @@ Pod::Spec.new do |s|
     sub.resource_bundle = { 
       "ZenIDModels" => [
         # ID card
-        "Models/documents/CZ/recoglibc_IDC1_B.bin", 
-        "Models/documents/CZ/recoglibc_IDC1_F.bin", 
-        "Models/documents/CZ/recoglibc_IDC2_B.bin", 
-        "Models/documents/CZ/recoglibc_IDC2_F.bin",
+        "Models/documents/CZ/usurf_idc1_b.bin", 
+        "Models/documents/CZ/usurf_idc1_f.bin", 
+        "Models/documents/CZ/usurf_idc2_b.bin", 
+        "Models/documents/CZ/usurf_idc2_f.bin",
 
         # Passport
-        "Models/documents/CZ/recoglibc_PAS_F.bin",
+        "Models/documents/CZ/usurf_pas_f.bin",
 
         # Driving
-        "Models/documents/CZ/recoglibc_DRV_F.bin"
+        "Models/documents/CZ/usurf_drv_f.bin"
       ] 
     }
   end
