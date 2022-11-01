@@ -45,6 +45,7 @@
 // Login
 "login-qr-cancel" = "Cancel";
 "login-qr-note" = "Scan QR code to login";
+"login-qr-gallery" = "Open QR code from gallery";
 
 // Choice
 "title-select" = "Choose\ndocument type";
@@ -69,6 +70,7 @@
 "btn-logout" = "Logout";
 "btn-filter" = "Filter";
 "btn-webview" = "Web View";
+"btn-pure-verifier" = "Pure verifier";
 
 // Walkthrough
 "walkthrough-title-0" = "Document information";

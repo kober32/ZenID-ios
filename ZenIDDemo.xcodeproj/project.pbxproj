@@ -143,8 +143,8 @@
 		6FD5BDFF26409471001943DD /* ZenIDLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD5BDFE26409471001943DD /* ZenIDLogger.swift */; };
 		6FF5E9CD2468ACF20077980C /* CredentialsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5E9CC2468ACF20077980C /* CredentialsSettings.swift */; };
 		6FFC82C2247F029D00CB4979 /* QrScannerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFC82C1247F029D00CB4979 /* QrScannerControllerDelegate.swift */; };
-		BA3ABE9B289D3EF7005C28F3 /* RecogLib_iOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA3ABE99289D3EAB005C28F3 /* RecogLib_iOS.xcframework */; };
-		BA3ABE9C289D3EF7005C28F3 /* RecogLib_iOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA3ABE99289D3EAB005C28F3 /* RecogLib_iOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BA775B4628CB79E9006278DE /* RecogLib_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA775B4528CB79E9006278DE /* RecogLib_iOS.framework */; };
+		BA775B4728CB79E9006278DE /* RecogLib_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA775B4528CB79E9006278DE /* RecogLib_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BABECC73288059D600A629F3 /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = BABECC72288059D600A629F3 /* CocoaLumberjack */; };
 		BABECC75288059D600A629F3 /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BABECC74288059D600A629F3 /* CocoaLumberjackSwift */; };
 		BABECC7828805A2700A629F3 /* ZipArchive in Frameworks */ = {isa = PBXBuildFile; productRef = BABECC7728805A2700A629F3 /* ZipArchive */; };
@@ -163,6 +163,7 @@
 		D2CB352522BB7BA900453DB8 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CB352422BB7BA900453DB8 /* Responses.swift */; };
 		D2CB352722BB84CA00453DB8 /* DispatchError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CB352622BB84CA00453DB8 /* DispatchError.swift */; };
 		D2CB352922BB84F700453DB8 /* DispatchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CB352822BB84F700453DB8 /* DispatchResult.swift */; };
+		E087641328FE0CC700D88353 /* PureVerifierViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E087641228FE0CC700D88353 /* PureVerifierViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -172,8 +173,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BA3ABE9C289D3EF7005C28F3 /* RecogLib_iOS.xcframework in Embed Frameworks */,
 				BABECC7F28805DE600A629F3 /* LibZenid_iOS.xcframework in Embed Frameworks */,
+				BA775B4728CB79E9006278DE /* RecogLib_iOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +327,7 @@
 		6FFC82C1247F029D00CB4979 /* QrScannerControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrScannerControllerDelegate.swift; sourceTree = "<group>"; };
 		BA3ABE99289D3EAB005C28F3 /* RecogLib_iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = RecogLib_iOS.xcframework; path = Sources/RecogLib_iOS.xcframework; sourceTree = "<group>"; };
 		BA3CB048286CD76F00C7C08D /* LibZenid_iOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LibZenid_iOS.xcframework; path = Sources/LibZenid_iOS.xcframework; sourceTree = "<group>"; };
+		BA775B4528CB79E9006278DE /* RecogLib_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RecogLib_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAF9E49D284F6CF10030212D /* ZenIDDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZenIDDemo.entitlements; sourceTree = "<group>"; };
 		D24C3C7522CA540A00585770 /* DocumentState+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentState+Localized.swift"; sourceTree = "<group>"; };
 		D293FE1922CA393D00FC49D0 /* RecoglibMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoglibMapper.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 		D2CB352422BB7BA900453DB8 /* Responses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Responses.swift; sourceTree = "<group>"; };
 		D2CB352622BB84CA00453DB8 /* DispatchError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchError.swift; sourceTree = "<group>"; };
 		D2CB352822BB84F700453DB8 /* DispatchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchResult.swift; sourceTree = "<group>"; };
+		E087641228FE0CC700D88353 /* PureVerifierViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PureVerifierViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,8 +353,8 @@
 				BABECC73288059D600A629F3 /* CocoaLumberjack in Frameworks */,
 				18BDC33D2795C3E40016AAF6 /* WebKit.framework in Frameworks */,
 				BABECC75288059D600A629F3 /* CocoaLumberjackSwift in Frameworks */,
+				BA775B4628CB79E9006278DE /* RecogLib_iOS.framework in Frameworks */,
 				BABECC7E28805DE600A629F3 /* LibZenid_iOS.xcframework in Frameworks */,
-				BA3ABE9B289D3EF7005C28F3 /* RecogLib_iOS.xcframework in Frameworks */,
 				BABECC7828805A2700A629F3 /* ZipArchive in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,6 +393,7 @@
 				012F7B65228B14FF00B0BBB6 /* PreviewViewController.swift */,
 				012F7B49228557BE00B0BBB6 /* WalkthroughViewController.swift */,
 				18371B2F27C3CCA3002528F3 /* NavigationController.swift */,
+				E087641228FE0CC700D88353 /* PureVerifierViewController.swift */,
 				18953D4E268242720077F976 /* Grouped Table View */,
 				18953D472682418B0077F976 /* Settings */,
 				18953D592682468E0077F976 /* Selection */,
@@ -482,6 +486,7 @@
 		0134753121ECBC2D004EE4E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BA775B4528CB79E9006278DE /* RecogLib_iOS.framework */,
 				18BDC33C2795C3E40016AAF6 /* WebKit.framework */,
 				6FF414DA26148FDC0091CBEB /* ZipArchive.xcframework */,
 				6FE1D50C2612705E00529241 /* CocoaLumberjack.xcframework */,
@@ -890,6 +895,7 @@
 				18953D882682EBBF0077F976 /* DocumentFilterTableCell.swift in Sources */,
 				D2CB352022BA794F00453DB8 /* UserDefaults+Subscript.swift in Sources */,
 				D2AB79EB22B904F800F1D7AA /* PDFHelper.swift in Sources */,
+				E087641328FE0CC700D88353 /* PureVerifierViewController.swift in Sources */,
 				18953DB8268467F90077F976 /* DocumentVerifierSettingsView.swift in Sources */,
 				01859B0622C4863C005B7E36 /* UIDevice+Size.swift in Sources */,
 				18953DC126847CBF0077F976 /* DocumentVerifierSettingsLoader.swift in Sources */,
@@ -1162,8 +1168,8 @@
 				CODE_SIGN_ENTITLEMENTS = ZenIDDemo/ZenIDDemo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 153;
-				DEVELOPMENT_TEAM = FQAZ2Y87Y2;
+				CURRENT_PROJECT_VERSION = 156;
+				DEVELOPMENT_TEAM = W7E97PR68Q;
 				ENABLE_BITCODE = NO;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1183,7 +1189,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.9;
+				MARKETING_VERSION = 2.0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.trask.ZenID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1200,9 +1206,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ZenIDDemo/ZenIDDemo.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 153;
-				DEVELOPMENT_TEAM = FQAZ2Y87Y2;
+				CURRENT_PROJECT_VERSION = 156;
+				DEVELOPMENT_TEAM = W7E97PR68Q;
 				ENABLE_BITCODE = NO;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1219,7 +1226,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.9;
+				MARKETING_VERSION = 2.0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = cz.trask.ZenID;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

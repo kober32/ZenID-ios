@@ -45,6 +45,7 @@
 // Login
 "login-qr-cancel" = "Zrušit";
 "login-qr-note" = "Naskenujte QR kód pro přihlášení";
+"login-qr-gallery" = "Vybrat QR kód z galerie";
 
 // Choice
 "title-select" = "Zvolte typ dokladu";
@@ -69,6 +70,7 @@
 "btn-logout" = "Odhlásit";
 "btn-filter" = "Filter";
 "btn-webview" = "Web View";
+"btn-pure-verifier" = "Pouze verifier";
 
 // Walkthrough
 "walkthrough-title-0" = "Údaje z dokladu";

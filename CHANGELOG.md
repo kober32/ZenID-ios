@@ -1,4 +1,33 @@
 # Change Log
+
+## 2.0.12 2022-10-25
+* Updated LibZenid 2.10.4
+* Improved tracking and classification of documents.
+* Added the modelhashes.bin model, used for all countries for documents and holograms.
+* Added RO_IDC_2021sep in DocumentCodes enum.
+* Added RecogLibCAssertionException that is thrown for failed internal assertions. It's derived from RecogLibCException, so no code changes are necessary on the implementer side.
+* Added additional parameters describing the liveness check steps. ZenID-issues#2736
+* Fix the darkness validator being too strict.
+* Fix a bug that reduces tracking accuracy. ZenID-issues#2741
+
+
+## 2.0.11 2022-10-03
+* Support for Serbian passports (v2008). ZenID-issues#2617
+* Support for Bosnian passports (v2014). ZenID-issues#2618
+* Support for Albanian passports (v2009). ZenID-issues#2619
+* Support for Macedonian passports (v2007). ZenID-issues#2620
+* Support for Belarussian passports (v2006 and v2021). ZenID-issues#2621
+* Support for Montenegrin passports (v2008). ZenID-issues#2617
+* Support for Norwegian passports (v2011/2015 and v2020). ZenID-issues#2634
+* Support for Polish passport version 2011. ZenID-issues#2585 SZENID-1694
+* Support for Croatian passport version 2009/2015. ZenID-issues#2585 SZENID-1694
+* Support for Moldovan passports (v2011/2014/2018). ZenID-issues#2637
+* Support for Icelandic passports (v2019 and v2006). ZenID-issues#2638
+
+## 2.0.10 2022-09-09
+* Fix for NL DRV 2013
+* Fix Selfie cannot snap  after reject button tap
+
 ## 2.0.9 2022-08-25
 * Updated LibZenid 2.8.3
 * New: Support for Dutch driving license (v2013 and v2014). ZenID-issues#2514
