@@ -26,7 +26,10 @@ Pod::Spec.new do |s|
         "Models/documents/CZ/usurf_pas_f.bin",
 
         # Driving
-        "Models/documents/CZ/usurf_drv_f.bin"
+        "Models/documents/CZ/usurf_drv_f.bin",
+
+        # Required
+        "Models/documents/DOCUMENT/modelhashes.bin",
       ] 
     }
   end
