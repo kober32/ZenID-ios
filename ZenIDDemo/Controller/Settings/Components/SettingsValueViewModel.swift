@@ -1,5 +1,5 @@
 //
-//  DocumentVerifierSettingsValueViewModel.swift
+//  SettingsValueViewModel.swift
 //  ZenIDDemo
 //
 //  Created by Libor Polehna on 24.06.2021.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct DocumentVerifierSettingsValueViewModel {
+struct SettingsValueViewModel {
     let title: String
     let value: Float
     let min: Float

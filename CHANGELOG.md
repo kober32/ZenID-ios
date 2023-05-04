@@ -1,7 +1,51 @@
 # Change Log
 
+# 2.0.17 2023-03-07
+* RecogLib 3.3.1
+* The face liveness check takes a selfie picture at a random point while performing the steps.
+* The face liveness check retakes a new selfie picture after a failed attempt.
+
+# 2.0.16 2023-03-01
+* RecogLib 3.2.4
+* Fix tracking issues when the card is far from the center.
+* SDK: When the image is blurry, an animation is shown to the user to indicate that he should move the phone further away from the card.
+* SDK: The SDK won't take a picture of the card when it's too far outside the outline.
+* New: Support for Swedish ID cards v2022.
+* New: Support for Indian passports v2000/2013.
+* New: Support for Swedish passports v2022.
+* New: Support for Danish passports v2021.
+* New: Support for Swiss passports v2022.
+* New: Support for Vietnamese passports v2022.
+* Improvement: Support for new variant of Montenegrin passport.
+* API: Added SE_IDC_2022, SE_PAS_2022, DK_PAS_2021, CH_PAS_2022, ME_PAS_2008_A2 and VN_PAS_2022 in DocumentCodes enum.
+* Added usurf_in_pas_2000_13_f.bin
+* Added usurf_se_idc_2022_f.bin
+* Added usurf_se_idc_2022_b.bin
+* Added usurf_se_pas_2022_f.bin
+* Added usurf_dk_pas_2021_f.bin
+* Added usurf_ch_pas_2022_f.bin
+* Added usurf_vn_pas_2022_f.bin
+
+
+# 2.0.15 2023-01-07
+* RecogLib 2.12.3
+* Fix bug that could cause issues in tracking especially with Birth Certificates.
+* New: Support for Slovak ID cards v2022 TRASKZENIDPV-749
+
+# 2.0.14 2022-11-28
+* RecogLib 2.11.3
+* Fix issue with Birth Certificate tracking. TRASKZENIDPV-588
+* FPS and resolution width of selfie video and document video can be changed in Settings and the values are exposed to SDK. TRASKZENIDPV-468
+* Important: The default value of parameter *drawOutline* in DocumentVerifierSettings changed from *false* to *true*
+
+## 2.0.13 2022-11-07
+* RecogLib 2.11.1
+* New: Support for Slovak residency permits v2011. TRASKZENIDPV-388
+* New: Support for Lithuanian ID cards (v2021). TRASKZENIDPV-461
+* Fixed hologram check getting stuck in the "align card" step.
+
 ## 2.0.12 2022-10-25
-* Updated LibZenid 2.10.4
+* RecogLib 2.10.4
 * Improved tracking and classification of documents.
 * Added the modelhashes.bin model, used for all countries for documents and holograms.
 * Added RO_IDC_2021sep in DocumentCodes enum.
@@ -9,6 +53,7 @@
 * Added additional parameters describing the liveness check steps. ZenID-issues#2736
 * Fix the darkness validator being too strict.
 * Fix a bug that reduces tracking accuracy. ZenID-issues#2741
+* Fix a bug when Romanian ID cannot be detected
 
 
 ## 2.0.11 2022-10-03

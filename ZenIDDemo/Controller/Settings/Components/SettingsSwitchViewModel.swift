@@ -2,7 +2,7 @@
 import Foundation
 
 
-struct DocumentVerifierSettingsSwitchViewModel {
+struct SettingsSwitchViewModel {
     let title: String
     let value: Bool
     let onChange: (Bool) -> Void
