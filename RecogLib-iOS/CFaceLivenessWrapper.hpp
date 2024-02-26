@@ -38,7 +38,8 @@ struct CFaceLivenessVerifierSettings {
 typedef struct CFaceLivenessVerifierSettings CFaceLivenessVerifierSettings;
 
 // Initialisation and loading models
-const void * getFaceLivenessVerifier(const char* resourcesPath, CFaceLivenessVerifierSettings *settings);
+void * getFaceLivenessVerifier(const char* resourcesPath, CFaceLivenessVerifierSettings *settings);
+void deleteFaceLivenessVerifier(void *verifier);
 
 // Verifying faces
 bool verifyFaceLiveness(const void *object, CMSampleBufferRef _mat, CFaceLivenessInfo *faceDetector);
@@ -59,6 +60,8 @@ void setFaceLivenessDebugInfo(const void *object, bool show);
 // Video settings
 int getFaceLivenessRequiredFps(const void *object);
 int getFaceLivenessRequiredVideoResolution(const void *object);
+
+void getFaceLivenessResult(const void *object, CFaceLivenessInfo *face);
 
 #ifdef __cplusplus
 }

@@ -6,7 +6,7 @@
 
 using namespace RecogLibC;
 
-const void * getFaceLivenessVerifier(const char* resourcesPath, CFaceLivenessVerifierSettings *settings)
+void * getFaceLivenessVerifier(const char* resourcesPath, CFaceLivenessVerifierSettings *settings)
 {
     FaceLivenessVerifierSettings verifierSettings = FaceLivenessVerifierSettings();
     verifierSettings.enableLegacyMode = settings->enableLegacyMode;
@@ -14,6 +14,11 @@ const void * getFaceLivenessVerifier(const char* resourcesPath, CFaceLivenessVer
     verifierSettings.visualizerVersion = settings->visualizerVersion;
     FaceLivenessVerifier *verifier = new FaceLivenessVerifier(resourcesPath, std::make_shared<FaceLivenessVerifierSettings>(verifierSettings));
     return (void *)verifier;
+}
+
+void deleteFaceLivenessVerifier(void *verifier)
+{
+    delete ((FaceLivenessVerifier *) verifier);
 }
 
 bool verifyFaceLiveness(const void *object,
@@ -165,4 +170,20 @@ int getFaceLivenessRequiredVideoResolution(const void *object)
         return  resolution.value();
     }
     return 0;
+}
+
+void getFaceLivenessResult(const void *object, CFaceLivenessInfo *face) {
+    FaceLivenessVerifier *verifier =(FaceLivenessVerifier *)object;
+    
+    const auto state = verifier->GetStage();
+    
+    if (state == FaceLivenessVerifierState::Ok) {
+        CImageSignature signature = CImageSignature();
+        signature.signature = verifier->GetSignature().c_str();
+        signature.signatureSize = static_cast<int>(verifier->GetSignature().size());
+        signature.image = verifier->GetSignedImage().data();
+        signature.imageSize = static_cast<int>(verifier->GetSignedImage().size());
+        face->signature = signature;
+    }
+    face->state = static_cast<int>(state);
 }

@@ -1,11 +1,10 @@
 #pragma once
 
-#ifndef NO_FACE
-
+#include "RecogLibCApi.h"
 #include "ZenidEnums.generated.h"
 
 #ifndef NO_OPENCV
-#include "opencv2/core.hpp"
+#include <opencv2/core.hpp>
 #endif
 
 #include <memory>
@@ -14,7 +13,7 @@
 #include <string>
 #include <optional>
 
-namespace RecogLibC
+namespace RecogLibC RECOGLIBC_PUBLIC
 {
 enum class Orientation;
 class Image;
@@ -37,12 +36,6 @@ public:
 
 	// Show the default smile animation when the feedback is "Smile".
 	bool showSmileAnimation = true;
-
-	//FPS at which the video should be recorded
-	std::optional<int> fps;
-
-	// Resolution width with which the video should be recorded
-	std::optional<int> resolutionWidth;
 };
 
 class FaceLivenessVerifier
@@ -85,9 +78,7 @@ class FaceLivenessVerifier
 	~FaceLivenessVerifier();
 
    private:
-	class Impl;
+	class RECOGLIBC_PRIVATE Impl;
 	std::unique_ptr<Impl> pImpl;
 };
 }
-
-#endif

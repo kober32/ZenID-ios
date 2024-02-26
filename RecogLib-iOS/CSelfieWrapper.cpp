@@ -6,12 +6,17 @@
 
 using namespace RecogLibC;
 
-const void * getSelfieVerifier(CSelfieVerifierSettings *settings)
+void * getSelfieVerifier(CSelfieVerifierSettings *settings)
 {
     SelfieVerifierSettings verifierSettings = SelfieVerifierSettings();
     verifierSettings.visualizerVersion = settings->visualizerVersion;
     SelfieVerifier *verifier = new SelfieVerifier(std::make_shared<SelfieVerifierSettings>(verifierSettings));
     return (void *)verifier;
+}
+
+void deleteSelfieVerifier(void *verifier)
+{
+    delete ((SelfieVerifier *) verifier);
 }
 
 void loadSelfie(const void *object,
@@ -100,4 +105,13 @@ void setSelfieDebugInfo(const void *object,
 {
     SelfieVerifier *verifier = (SelfieVerifier *)object;
     verifier->SetDebugVisualization(show);
+}
+
+CSelfieVerifierSettings getSelfieSettings(const void *object) {
+    SelfieVerifier *verifier = (SelfieVerifier *)object;
+    SelfieVerifierSettings& verifierSettings = verifier->GetSettings();
+    
+    CSelfieVerifierSettings settings = CSelfieVerifierSettings();
+    settings.visualizerVersion = verifierSettings.visualizerVersion;
+    return settings;
 }

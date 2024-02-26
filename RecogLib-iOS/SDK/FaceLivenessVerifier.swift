@@ -2,7 +2,7 @@ import CoreMedia
 import Foundation
 
 public class FaceLivenessVerifier {
-    private var cppObject: UnsafeRawPointer?
+    private var cppObject: UnsafeMutableRawPointer?
 
     public var language: SupportedLanguages
     private let settings: FaceLivenessVerifierSettings?
@@ -16,6 +16,12 @@ public class FaceLivenessVerifier {
     public init(language: SupportedLanguages, settings: FaceLivenessVerifierSettings? = nil) {
         self.language = language
         self.settings = settings
+    }
+    
+    deinit {
+        if cppObject != nil {
+            deleteFaceLivenessVerifier(cppObject)
+        }
     }
 
     public func loadModels(_ loader: FaceVerifierModels) {
@@ -96,6 +102,15 @@ public class FaceLivenessVerifier {
     public func getRequiredResolution() -> Int {
         let resolution = RecogLib_iOS.getFaceLivenessRequiredVideoResolution(cppObject)
         return Int(resolution)
+    }
+    
+    /// A method that returns the current result of the face liveness video being verified.
+    /// It is usually called to check the status after sending NFC data for processing `verifier.processNfc(..)`
+    public func getLivenessResult(orientation: UIInterfaceOrientation = .portrait) -> FaceLivenessResult? {
+        var face = createFaceLivenessInfo(orientation: orientation)
+        RecogLib_iOS.getFaceLivenessResult(cppObject, &face)
+        let result = FaceLivenessResult(faceLivenessState: face.state, signature: face.signature)
+        return result
     }
     
     private func createFaceLivenessInfo(orientation: UIInterfaceOrientation) -> CFaceLivenessInfo {

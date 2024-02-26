@@ -35,23 +35,18 @@ public final class Camera: NSObject {
     private var cameraVideoOutput: AVCaptureVideoDataOutput!
 
     private var takePictureCompletion: ((Swift.Result<Data, Swift.Error>) -> Void)?
-
-    override public init() {
-        super.init()
+    
+    public func isCaptureSessionRunning() -> Bool {
+        captureSession.isRunning
     }
 
     func configure(with configuration: CameraConfiguration) throws {
         let captureDevicePosition: AVCaptureDevice.Position = configuration.type == .back ? .back : .front
-        var deviceTypes: [AVCaptureDevice.DeviceType] = [.builtInWideAngleCamera]
-        if #available(iOS 13.0, *) {
-            if UIDevice.isProModel {
-                deviceTypes = [.builtInTripleCamera, .builtInDualCamera, .builtInWideAngleCamera]
-            }
-        }
-        let deviceDescoverySession = AVCaptureDevice.DiscoverySession(
-            deviceTypes: deviceTypes, mediaType: .video, position: captureDevicePosition
-        )
-        captureDevice = deviceDescoverySession.devices.first
+        var deviceTypes = [AVCaptureDevice.DeviceType.builtInWideAngleCamera]
+        let deviceDescoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes,
+                                                                      mediaType: .video,
+                                                                      position: captureDevicePosition)
+        captureDevice = deviceDescoverySession.devices.last
 
         guard let device = captureDevice, setupCameraSession(device) else {
             throw CameraError.notInitialized
@@ -61,13 +56,18 @@ public final class Camera: NSObject {
         }
 
         captureSession.sessionPreset = .high
+        
+        // Zoom factor is necessary to compensate minimal focus distance by newer iphones (13 Pro +)
+        if #available(iOS 15.0, *) {
+            Camera.setRecommendedZoomFactor(for: device)
+        }
     }
 
     func start() {
         if captureSession.isRunning {
             return
         }
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             self?.captureSession.startRunning()
         }
     }
@@ -77,7 +77,7 @@ public final class Camera: NSObject {
         if !captureSession.isRunning {
             return
         }
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             self?.captureSession.stopRunning()
         }
     }
@@ -109,10 +109,8 @@ public final class Camera: NSObject {
         default: break
         }
 
-        if #available(iOS 13.0, *) {
-            for connection in captureSession.connections {
-                connection.videoOrientation = previewLayer?.connection?.videoOrientation ?? .portrait
-            }
+        for connection in captureSession.connections {
+            connection.videoOrientation = previewLayer?.connection?.videoOrientation ?? .portrait
         }
 
         DispatchQueue.main.async { [weak self] in
@@ -210,34 +208,61 @@ private extension Camera {
 
         return true
     }
+    
 }
 
-#if os(iOS)
-    public extension UIDevice {
-        static let isProModel: Bool = {
-            var systemInfo = utsname()
-            uname(&systemInfo)
-            let machineMirror = Mirror(reflecting: systemInfo.machine)
-            let identifier = machineMirror.children.reduce("") { identifier, element in
-                guard let value = element.value as? Int8, value != 0 else { return identifier }
-                return identifier + String(UnicodeScalar(UInt8(value)))
+// This extension include all methods necessary for zoom compensation to fix minimal focus distance on newer devices.
+public extension Camera {
+    
+    /// Zoom video feed to compensate for minimal focus distance.
+    /// - Parameters:
+    ///   - device: Device that is compensated.
+    ///   - subjectSize: Minimal object size to focus on in milimeters. (default is 110mm)
+    @available(iOS 15.0, *)
+    static func setRecommendedZoomFactor(for device: AVCaptureDevice, subjectSize: Float = 110) {
+        let deviceMinimumFocusDistance = Float(device.minimumFocusDistance)
+        guard deviceMinimumFocusDistance != -1 else { return }
+        
+        let deviceFieldOfView = device.activeFormat.videoFieldOfView
+        let minimumSubjectDistance = minimumSubjectDistance(fieldOfView: deviceFieldOfView,
+                                                            minimumSubjectSize: subjectSize,
+                                                            previewFillPercentage: 1)
+        if minimumSubjectDistance < deviceMinimumFocusDistance {
+            let zoomFactor = deviceMinimumFocusDistance / minimumSubjectDistance
+            do {
+                try device.lockForConfiguration()
+                device.videoZoomFactor = CGFloat(zoomFactor)
+                device.unlockForConfiguration()
+            } catch {
+                print("Could not lock for configuration: \(error)")
             }
-
-            // Camera selection oon iPhone 12 Pro is ok, not needed to detect
-            func mapProDevices(identifier: String) -> Bool { // swiftlint:disable:this cyclomatic_complexity
-                switch identifier {
-                // "iPhone 13 Pro"
-                case "iPhone14,2": return true
-                // "iPhone 13 Pro Max"
-                case "iPhone14,3": return true
-                // "iPhone 14 Pro"
-                case "iPhone15,2": return true
-                // "iPhone 14 Pro Max"
-                case "iPhone15,3": return true
-                default: return false
-                }
-            }
-            return mapProDevices(identifier: identifier)
-        }()
+        }
     }
-#endif
+    
+    /// Given the camera horizontal field of view, we can compute the distance (mm) to make a code
+    /// of minimumCodeSize (mm) fill the previewFillPercentage.
+    ///
+    /// - Parameters:
+    ///   - fieldOfView: Field of view in degree.
+    ///   - minimumSubjectSize: Minimal subject size to focus on in milimeters.
+    ///   - previewFillPercentage: How much it shall fill the frame.
+    /// - Returns: Required distance as fraction.
+    static private func minimumSubjectDistance(
+        fieldOfView: Float,
+        minimumSubjectSize: Float,
+        previewFillPercentage: Float
+    ) -> Float {
+        let radians = degreesToRadians(fieldOfView / 2)
+        let filledCodeSize = minimumSubjectSize / previewFillPercentage
+        return filledCodeSize / tan(radians)
+    }
+    
+    /// Convert degrees to radians.
+    ///
+    /// - Parameter degrees: Value representing degrees.
+    /// - Returns: Calculated radians.
+    static private func degreesToRadians(_ degrees: Float) -> Float {
+        return degrees * Float.pi / 180
+    }
+    
+}

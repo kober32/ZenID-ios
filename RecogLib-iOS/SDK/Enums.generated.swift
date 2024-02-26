@@ -159,6 +159,19 @@ public enum DocumentCodes : Int, CaseIterable {
     case CH_PAS_2022 = 158
     case VN_PAS_2022 = 159
     case ME_PAS_2008_A2 = 160
+    case CZ_RES_2020_A2 = 161
+    case OL_IDC_2022 = 162
+    case SM_PAS_2006 = 163
+    case AD_PAS_2017 = 164
+    case BE_PAS_2022 = 165
+    case RU_PAS_2006_10 = 166
+    case TR_PAS_2023 = 167
+    case DO_IDC_2014 = 168
+    case LI_PAS_2006 = 169
+    case VA_PAS_2013 = 170
+    case US_PAS_2006 = 171
+    case JP_PAS_2013 = 172
+    case PK_PAS_2022 = 173
 }
 
 public enum PageCodes : Int, CaseIterable { 
@@ -189,6 +202,7 @@ public enum Country : Int, CaseIterable {
     case Si = 19
     case Bg = 20
     case Al = 21
+    case Ad = 22
     case Be = 23
     case By = 24
     case Ba = 25
@@ -196,20 +210,174 @@ public enum Country : Int, CaseIterable {
     case Ee = 27
     case Ie = 28
     case Cy = 29
+    case Li = 30
     case Lt = 31
     case Lv = 32
     case Lu = 33
     case Mt = 34
     case Md = 35
+    case Mc = 36
     case No = 37
     case Pt = 38
     case Gr = 39
+    case Sm = 40
     case Mk = 41
     case Rs = 42
     case Ch = 43
     case Tr = 44
+    case Va = 45
     case Vn = 46
     case In = 47
+    case Us = 48
+    case Jp = 49
+    case Pk = 50
+    case Ng = 51
+    case Br = 52
+    case Bd = 53
+    case Cn = 54
+    case Id = 55
+    case Mx = 56
+    case Ol = 57
+    case Ph = 58
+    case Et = 59
+    case Eg = 60
+    case Cd = 61
+    case Ir = 62
+    case Th = 63
+    case Tz = 64
+    case Za = 65
+    case Mm = 66
+    case Co = 67
+    case Kr = 68
+    case Ke = 69
+    case Ar = 70
+    case Dz = 71
+    case Sd = 72
+    case Ug = 73
+    case Iq = 74
+    case Ca = 75
+    case Ma = 76
+    case Uz = 77
+    case Sa = 78
+    case Ye = 79
+    case Pe = 80
+    case Ao = 81
+    case My = 82
+    case Af = 83
+    case Mz = 84
+    case Gh = 85
+    case Ci = 86
+    case Np = 87
+    case Ve = 88
+    case Mg = 89
+    case Au = 90
+    case Kp = 91
+    case Cm = 92
+    case Ne = 93
+    case Tw = 94
+    case Ml = 95
+    case Bf = 96
+    case Lk = 97
+    case Sy = 98
+    case Mw = 99
+    case Cl = 100
+    case Kz = 101
+    case Zm = 102
+    case Ec = 103
+    case So = 104
+    case Sn = 105
+    case Gt = 106
+    case Tf = 107
+    case Kh = 108
+    case Zw = 109
+    case Ss = 110
+    case Rw = 111
+    case Gn = 112
+    case Bi = 113
+    case Bj = 114
+    case Bo = 115
+    case Tn = 116
+    case Ht = 117
+    case Jo = 118
+    case Cu = 119
+    case Do = 120
+    case Az = 121
+    case Il = 122
+    case Tj = 123
+    case Hn = 124
+    case Ae = 125
+    case Sl = 126
+    case Tg = 127
+    case La = 128
+    case Kg = 129
+    case Tm = 130
+    case Ly = 131
+    case Sv = 132
+    case Ni = 133
+    case Py = 134
+    case Cg = 135
+    case Sg = 136
+    case Cf = 137
+    case Lb = 138
+    case Ps = 139
+    case Cr = 140
+    case Lr = 141
+    case Nz = 142
+    case Om = 143
+    case Kw = 144
+    case Mr = 145
+    case Pa = 146
+    case Er = 147
+    case Ge = 148
+    case Uy = 149
+    case Mn = 150
+    case Am = 151
+    case Jm = 152
+    case Qa = 153
+    case Na = 154
+    case Gm = 155
+    case Bw = 156
+    case Ls = 157
+    case Ga = 158
+    case Gw = 159
+    case Xk = 160
+    case Bh = 161
+    case Gq = 162
+    case Tt = 163
+    case Tl = 164
+    case Mu = 165
+    case Sz = 166
+    case Dj = 167
+    case Fj = 168
+    case Bt = 169
+    case Km = 170
+    case Gy = 171
+    case Sb = 172
+    case Sr = 173
+    case Cv = 174
+    case Bn = 175
+    case Bz = 176
+    case Bs = 177
+    case Mv = 178
+    case Vu = 179
+    case Bb = 180
+    case St = 181
+    case Ws = 182
+    case Lc = 183
+    case Ki = 184
+    case Gd = 185
+    case Vc = 186
+    case Fm = 187
+    case Ag = 188
+    case Sc = 189
+    case To = 190
+    case Dm = 191
+    case Kn = 192
+    case Mh = 193
+    case Pw = 194
+    case Nr = 195
+    case Tv = 196
+    case Pg = 197
 }
 
 public enum DocumentRole : Int, CaseIterable { 
@@ -225,6 +393,7 @@ public enum DocumentRole : Int, CaseIterable {
     case Add = 9
     case Ide = 10
     case Vis = 11
+    case Exp = 12
 }
 
 public enum SupportedLanguages : Int, CaseIterable { 
@@ -244,6 +413,8 @@ public enum DocumentVerifierState : Int, CaseIterable {
     case Hologram = 6
     case Dark = 7
     case Barcode = 8
+    case TextNotReadable = 9
+    case Nfc = 10
 }
 
 public enum SelfieVerifierState : Int, CaseIterable { 
@@ -260,6 +431,11 @@ public enum HologramState : Int, CaseIterable {
     case TiltLeftAndRight = 1
     case TiltUpAndDown = 2
     case Ok = 3
+    case TimedOut = 4
+    case TiltLeft = 5
+    case TiltRight = 6
+    case TiltUp = 7
+    case TiltDown = 8
 }
 
 public enum FaceLivenessVerifierState : Int, CaseIterable { 
@@ -270,6 +446,17 @@ public enum FaceLivenessVerifierState : Int, CaseIterable {
     case Blurry = 4
     case Dark = 5
     case HoldStill = 6
+    case Reseting = 7
+    case DontSmile = 8
+}
+
+public enum SampleType : Int, CaseIterable { 
+    case DocumentPicture = 0
+    case Selfie = 1
+    case SelfieVideo = 2
+    case DocumentVideo = 3
+    case Archived = 4
+    case Unknown = 5
 }
 
 public enum SdkSignatureProblem : Int, CaseIterable { 

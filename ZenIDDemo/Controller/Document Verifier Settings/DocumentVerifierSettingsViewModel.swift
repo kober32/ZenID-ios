@@ -35,29 +35,6 @@ final class DocumentVerifierSettingsViewModel {
     }
 
     private func update(settings: DocumentVerifierSettings) {
-        let intervalItems: [SettingsValueViewModel] = [
-            .init(
-                title: NSLocalizedString("document-verifier-settings-specular", comment: ""),
-                value: Float(settings.specularAcceptableScore), min: 0.0, max: 100.0,
-                onChange: { [weak self] value in
-                    self?.updater.update(specularAcceptableScore: Int(value))
-                }
-            ),
-            .init(
-                title: NSLocalizedString("document-verifier-settings-blur", comment: ""),
-                value: Float(settings.documentBlurAcceptableScore), min: 0.0, max: 100.0,
-                onChange: { [weak self] value in
-                    self?.updater.update(documentBlurAcceptableScore: Int(value))
-                }
-            ),
-            .init(
-                title: NSLocalizedString("document-verifier-settings-blur-tolerance", comment: ""),
-                value: Float(settings.timeToBlurMaxToleranceInSeconds), min: 0.0, max: 100.0,
-                onChange: { [weak self] value in
-                    self?.updater.update(timeToBlurMaxToleranceInSeconds: Int(value))
-                }
-            ),
-        ]
         let switchItems: [SettingsSwitchViewModel] = [
             .init(
                 title: NSLocalizedString("document-verifier-settings-timer", comment: ""),
@@ -79,16 +56,9 @@ final class DocumentVerifierSettingsViewModel {
                 onChange: { [weak self] value in
                     self?.updater.update(drawOutline: value)
                 }
-            ),
-            .init(
-                title: NSLocalizedString("document-verifier-settings-barcode", comment: ""),
-                value: settings.readBarcode,
-                onChange: { [weak self] value in
-                    self?.updater.update(readBarcode: value)
-                }
             )
         ]
 
-        onUpdate?(intervalItems.map({ .interval($0) }) + switchItems.map({ .switch($0) }))
+        onUpdate?(switchItems.map({ .switch($0) }))
     }
 }

@@ -102,7 +102,7 @@ final class PureVerifierViewController: UIViewController {
         if captureSession.isRunning {
             return
         }
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             self?.captureSession.startRunning()
         }
     }
@@ -111,7 +111,7 @@ final class PureVerifierViewController: UIViewController {
         if !captureSession.isRunning {
             return
         }
-        DispatchQueue.global().async { [weak self] in
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             self?.captureSession.stopRunning()
         }
     }
@@ -223,7 +223,11 @@ extension PureVerifierViewController {
 
 extension PureVerifierViewController {
     func setupCameraSession() -> Bool {
-        guard let device = AVCaptureDevice.default(for: .video) else { return false }
+        let deviceTypes = [AVCaptureDevice.DeviceType.builtInWideAngleCamera]
+        let deviceDescoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes,
+                                                                      mediaType: .video,
+                                                                      position: .back)
+        guard let device = deviceDescoverySession.devices.last else { return false }
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         previewLayer.videoGravity = .resizeAspectFill
@@ -249,29 +253,32 @@ extension PureVerifierViewController {
         captureSession.addOutput(cameraVideoOutput)
 
         captureSession.commitConfiguration()
+        
+        // Zoom factor is necessary to compensate minimal focus distance by newer iphones (13 Pro +)
+        if #available(iOS 15.0, *) {
+            Camera.setRecommendedZoomFactor(for: device)
+        }
 
         return true
     }
 
     func setOrientation(orientation: UIDeviceOrientation) {
-        if #available(iOS 13.0, *) {
-            for connection in captureSession.connections {
-                switch UIDevice.current.orientation {
-                case .portrait:
-                    previewLayer?.connection?.videoOrientation = .portrait
-                    connection.videoOrientation = .portrait
-                case .landscapeRight:
-                    previewLayer?.connection?.videoOrientation = .portrait
-                    connection.videoOrientation = .landscapeLeft
-                case .landscapeLeft:
-                    previewLayer?.connection?.videoOrientation = .portrait
-                    connection.videoOrientation = .landscapeRight
-                case .portraitUpsideDown:
-                    previewLayer?.connection?.videoOrientation = .portrait
-                    connection.videoOrientation = .portraitUpsideDown
-                default:
-                    break
-                }
+        for connection in captureSession.connections {
+            switch UIDevice.current.orientation {
+            case .portrait:
+                previewLayer?.connection?.videoOrientation = .portrait
+                connection.videoOrientation = .portrait
+            case .landscapeRight:
+                previewLayer?.connection?.videoOrientation = .portrait
+                connection.videoOrientation = .landscapeLeft
+            case .landscapeLeft:
+                previewLayer?.connection?.videoOrientation = .portrait
+                connection.videoOrientation = .landscapeRight
+            case .portraitUpsideDown:
+                previewLayer?.connection?.videoOrientation = .portrait
+                connection.videoOrientation = .portraitUpsideDown
+            default:
+                break
             }
         }
     }

@@ -32,12 +32,13 @@ public struct FacelivenessControllerConfiguration {
         self.showDebugVisualisation = showDebugVisualisation
         self.dataType = dataType
         self.settings = settings
+
     }
 }
 
 public protocol FacelivenessControllerDelegate: AnyObject {
     func controller(_ controller: FacelivenessController, didScan result: FaceLivenessResult)
-    func controller(_ controller: FacelivenessController, didRecord videoURL: URL)
+    func controller(_ controller: FacelivenessController, didRecord videoURL: URL, result: FaceLivenessResult)
     func controller(_ controller: FacelivenessController, didUpdate result: FaceLivenessResult)
 }
 
@@ -62,7 +63,7 @@ public final class FacelivenessController: BaseController<FaceLivenessResult>, F
     }
     
     public func configure(configuration: FacelivenessControllerConfiguration = .default) throws {
-        view.topLabel.text = LocalizedString("msg-scan-face", comment: "")
+        view?.topLabel.text = LocalizedString("msg-scan-face", comment: "")
         
         verifier.reset()
         config = configuration
@@ -73,7 +74,8 @@ public final class FacelivenessController: BaseController<FaceLivenessResult>, F
             dataType: configuration.dataType,
             cameraType: .front,
             requestedResolution: verifier.getRequiredResolution(),
-            requestedFPS: verifier.getRequiredFPS()
+            requestedFPS: verifier.getRequiredFPS(),
+            processType: .face
         )
         
         verifier.update(settings: configuration.settings)
@@ -107,10 +109,19 @@ public final class FacelivenessController: BaseController<FaceLivenessResult>, F
     }
     
     override func callDelegate(with videoUrl: URL) {
-        delegate?.controller(self, didRecord: videoUrl)
+        guard let result = verifier.getLivenessResult() else {
+            ApplicationLogger.shared.Warn("Failed to get face liveness result.")
+            return
+        }
+        delegate?.controller(self, didRecord: videoUrl, result: result)
     }
     
     override func callUpdateDelegate(with result: FaceLivenessResult) {
+        // When reseting liveness verifier reset video recording too.
+        if result.faceLivenessState == .Reseting, previousResult?.faceLivenessState != .Reseting {
+            restartVideoWriter()
+        }
+        
         delegate?.controller(self, didUpdate: result)
     }
     

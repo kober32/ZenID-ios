@@ -59,7 +59,7 @@ public final class SelfieController: BaseController<SelfieResult>, SelfieControl
     }
     
     public func configure(configuration: SelfieControllerConfiguration = .default) throws {
-        view.topLabel.text = LocalizedString("msg-scan-face", comment: "")
+        view?.topLabel.text = LocalizedString("msg-scan-face", comment: "")
         
         verifier.reset()
         config = configuration
@@ -70,7 +70,8 @@ public final class SelfieController: BaseController<SelfieResult>, SelfieControl
             dataType: configuration.dataType,
             cameraType: .front,
             requestedResolution: 0,
-            requestedFPS: 0
+            requestedFPS: 0,
+            processType: .selfie
         )
         
         verifier.showDebugInfo = config.showDebugVisualisation

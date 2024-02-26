@@ -1,5 +1,74 @@
 # Change Log
 
+# 2.0.25 2024-02-01
+* RecogLib 3.10.4
+* Improvement: Camera and CameraView are now public and can be mutated in VerifierControllers.
+* Improvement: CameraView is no longer in strong relationship and it is app responsibility to keep reference.
+* New: SDK has three new functions in ZenidSecurity that list and check countries and documents enabled by licence.
+* Fix: SDK has better memory management. 
+* Improvement: NFC dialog support Czech locale.
+
+# 2.0.24 2023-12-18
+* RecogLib 3.10.1
+* Added new possible values to HologramState enum: TiltLeft, TiltRight, TiltUp, TiltDown. Those represent the states of the new IQS hologram UI.
+* Improve compatibility with future iOS SDKs.
+* Improve camera focusing (without image juping) on new iPhone Pro models.
+
+# 2.0.23 2023-12-08
+* RecogLib 3.9.6
+* New: Support for Vaticanian passports v2013 (NFC only).
+* New: Support for Liechtensteiner passports v2006 (NFC only).
+* Improvement: Improved wording of Normalization parameters on Settings page.
+* Improvement: Retrained Mask on selfie validator.
+* New: Support for Andorran passports v2017 (NFC only).
+* New: Support for Sanmarinese passports v2006 (NFC only).
+* New: System updated to enable support for documents with just extracting its NFC data.
+* Improvement: Description of ZenidWebSdk.snapNow() method in manual. This function skips validators and signature is not created.
+* New: Support for Belgian Passport v2022.
+* Improvement: Signature is copied to clipboard with prefix.
+* Hide current step UI during TimedOut state.
+* Improvement: *Italian ID cards suppord broadened: Italian ID cards v2016/2022.
+* Add HologramState::TimedOut to expose timeout condition in IQS hologram flow.
+* New: `CameraView` class can be initialized from XIB or Storyboard.
+* New: You can override default videogravity using parameter in `CameraView`.
+* New: Parameter `ignoreSafeArea` in `CameraView` will stretch video view to fill whole UIView and ignore safe areas.
+* New: Video recording reset together with Liveness verifier to reduce video length.  
+
+# 2.0.22 2023-10-13
+* RecogLib 3.8.5
+* New: Added support for iPhone 15 line
+* Turkish passports v2023 are enabled for NFC reading.
+* New: Support for Dominican ID cards v2014.
+* Improvement: Dominican ID card MRZ reading.
+* Don't show card outline after card is removed from frame in IQS verifier.
+* New: Possibility to change time delay to become max tolerant for multiple FE validators has been added to SDK picture quality validator on the Sensitivity page.
+* New: Added WebView visualizer files to SDK releases.
+* SDK: Allow setting IQS verifier settings in backend validator sensitivity.
+
+# 2.0.21 2023-09-30
+* RecogLib 3.8.1
+* New support for NFC document reading (see MIGRATION.md)
+* New `DocumentControllerDelegate` method `func controller(_ controller: DocumentController, didScan result: DocumentResult, nfcCode: String)`
+* New `NfcDocumentReader` class
+* New SelectProfile feature that allows customers to set frontend validator configs on the backend.
+* New states for DocumentVerifierState and FaceLivenessVerifierState.
+* Removed attributes `specularAcceptableScore`, `documentBlurAcceptableScore` and `readBarcode` from struct `DocumentVerifierSettings`
+
+# 2.0.20 2023-06-15
+* Hologram length video reducing
+* Fixed issue when completing the face-liveness verification proces  
+
+# 2.0.19 2023-06-10
+* Fixed a memory issue in demo app
+
+# 2.0.18 2023-05-12
+* RecogLib 3.5.1
+* Added CZ_RES_2020_A2 in DocumentCodes enum.
+* Added OL_IDC_2022 in DocumentCodes enum, Exp (Experimental card) to DocumentRole and Ol (Olympus, experimental) to Country.
+* Support for experimental 'Olympus' ID card v2022.
+* Fixed a crash that could happen when resetting face liveness workflow with debug visualization enabled.
+* Fixed issue with starting and stopping camera cature session in demo app
+
 # 2.0.17 2023-03-07
 * RecogLib 3.3.1
 * The face liveness check takes a selfie picture at a random point while performing the steps.
