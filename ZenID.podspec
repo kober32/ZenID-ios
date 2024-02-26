@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
         "Models/documents/CZ/usurf_drv_f.bin",
 
         # Required
-        "Models/documents/DOCUMENT/modelhashes.bin",
+        "Models/mrz/modelhashes.bin",
       ] 
     }
   end
